@@ -1,12 +1,12 @@
-package com.example.statusboard
+package com.example.mysongs
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mysongs.Song
-import com.example.mysongs.SongActivity
+import com.example.mysongs.Utils.ObjectBoxUtils
 import com.example.mysongs.databinding.SongRowItemBinding
 
 /*
@@ -39,9 +39,10 @@ class SonglistAdapter(list: List<Song>) :
             itemBinding.songName.text = song.title.toString()
             if(song.artist != null)
             itemBinding.songArtist.text = song.artist.toString()
-            itemBinding.key.text = song.key!!.key
+            itemBinding.key.text = song.key?.key
 
             itemBinding.root.setOnClickListener { openSong(song) }
+            itemBinding.root.setOnLongClickListener { deleteSongDialog(song)}
         }
 
         private fun openSong(clickedSong: Song) {
@@ -51,6 +52,21 @@ class SonglistAdapter(list: List<Song>) :
             context.startActivity(intent)
         }
 
+        private fun deleteSongDialog(clickedSong: Song): Boolean {
+
+            val alertDialogBuilder = AlertDialog.Builder(itemBinding.root.rootView.context)
+            with(alertDialogBuilder){
+                setTitle("Delete ${clickedSong.title}?")
+                setPositiveButton("Ok") { _, _ ->
+                    ObjectBoxUtils.songBox.remove(clickedSong)
+                    ObjectBoxUtils.printDB()
+                    MainActivity().songList.
+                }
+                setNegativeButton("Abbrechen") { _, _ -> }
+            }
+            alertDialogBuilder.show()
+            return true
+        }
     }
 
 }

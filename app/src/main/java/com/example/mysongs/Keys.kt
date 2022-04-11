@@ -1,7 +1,5 @@
 package com.example.mysongs
 
-import io.objectbox.annotation.Entity
-
 enum class Keys(var key : String) {
     C("C"),
     Cs("C#"),
@@ -14,5 +12,6 @@ enum class Keys(var key : String) {
     Gs("G#"),
     A("A"),
     As("A#"),
-    H("H");
+    H("H"),
+    DEFAULT("default");
 }

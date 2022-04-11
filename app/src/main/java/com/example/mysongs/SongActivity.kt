@@ -13,7 +13,6 @@ import com.example.mysongs.databinding.ActivityBoardBinding
 class SongActivity : AppCompatActivity(), View.OnKeyListener {
 
     private lateinit var binding: ActivityBoardBinding
-    private val TAG = "MySongsApp"
     var clickedSong: Song? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +39,7 @@ class SongActivity : AppCompatActivity(), View.OnKeyListener {
                 R.layout.simple_spinner_item,
                 Keys.values().map { y -> y.key }.toTypedArray()
             )
-            mySpinner.setSelection(clickedSong!!.key!!.ordinal)
+            mySpinner.setSelection(clickedSong?.key!!.ordinal)
 
             //Spinner onItemSelectedListener
             binding.spinnerKey.onItemSelectedListener =

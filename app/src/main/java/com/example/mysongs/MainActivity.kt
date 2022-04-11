@@ -6,29 +6,30 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mysongs.Utils.ObjectBoxUtils
 import com.example.mysongs.databinding.ActivityMainBinding
 import com.example.mysongs.databinding.AddSongDialogBinding
-import com.example.statusboard.SonglistAdapter
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var newSongDialog : AlertDialog
     private lateinit var songAdapter: SonglistAdapter
-    private var songList: MutableList<Song> = ArrayList()
-    private val songBox = ObjectBox.store.boxFor(Song::class.java)
+    var songList: MutableList<Song> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ObjectBox.init(this)
-        songList = songBox.all
+        ObjectBoxUtils.init(this)
+
+        songList = ObjectBoxUtils.songBox.all
+        songAdapter = SonglistAdapter(songList)
         songAdapter.notifyItemInserted(songList.size)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         val recyclerView: RecyclerView = binding.recyclerView
-        songAdapter = SonglistAdapter(songList)
+
         recyclerView.adapter = songAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun newSongDialog(){
+
         val dialogBinding : AddSongDialogBinding = AddSongDialogBinding.inflate(layoutInflater)
         val dialogBuilder = AlertDialog.Builder(this)
         dialogBuilder.setTitle("Add Song")
@@ -49,10 +51,11 @@ class MainActivity : AppCompatActivity() {
 
             if (newSongName.isNotEmpty()) {
                 //create Status object and add to list
-                val song = Song(songBox.count() ,newSongName, newSongArtist, newSongKey)
-                songBox.put(song)
+                val song = Song(0 ,newSongName, newSongArtist, newSongKey)
+                ObjectBoxUtils.songBox.put(song)
                 songList.add(song)
                 songAdapter.notifyItemInserted(songList.size + 1)
+                ObjectBoxUtils.printDB()
                 newSongDialog.dismiss()
             }
         }
@@ -62,4 +65,5 @@ class MainActivity : AppCompatActivity() {
         newSongDialog = dialogBuilder.create()
         newSongDialog.show()
     }
+
 }
