@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysongs.Utils.ObjectBoxUtils
+import com.example.mysongs.Utils.SongListUtils
 import com.example.mysongs.databinding.SongRowItemBinding
 
 /*
@@ -58,9 +59,8 @@ class SonglistAdapter(list: List<Song>) :
             with(alertDialogBuilder){
                 setTitle("Delete ${clickedSong.title}?")
                 setPositiveButton("Ok") { _, _ ->
-                    ObjectBoxUtils.songBox.remove(clickedSong)
+                    SongListUtils.removeSong(clickedSong)
                     ObjectBoxUtils.printDB()
-                    MainActivity().songList.
                 }
                 setNegativeButton("Abbrechen") { _, _ -> }
             }

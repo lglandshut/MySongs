@@ -30,7 +30,7 @@ class RoleConverter : PropertyConverter<Keys?, String?> {
                 return key
             }
         }
-        return Keys.DEFAULT
+        return Keys.C
     }
 
     override fun convertToDatabaseValue(entityProperty: Keys?): String? {

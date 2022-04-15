@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysongs.Utils.ObjectBoxUtils
+import com.example.mysongs.Utils.SongListUtils
 import com.example.mysongs.databinding.ActivityMainBinding
 import com.example.mysongs.databinding.AddSongDialogBinding
 
@@ -14,27 +15,22 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var newSongDialog : AlertDialog
-    private lateinit var songAdapter: SonglistAdapter
-    var songList: MutableList<Song> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ObjectBoxUtils.init(this)
-
-        songList = ObjectBoxUtils.songBox.all
-        songAdapter = SonglistAdapter(songList)
-        songAdapter.notifyItemInserted(songList.size)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        ObjectBoxUtils.init(this)
+        SongListUtils.init(this, binding)
         val view = binding.root
         setContentView(view)
 
-        val recyclerView: RecyclerView = binding.recyclerView
-
-        recyclerView.adapter = songAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
         val addButton = binding.floatingActionButton;
         addButton.setOnClickListener{ newSongDialog()}
+    }
+
+    override fun onResume() {
+        super.onResume()
+        SongListUtils.refreshList()
     }
 
     private fun newSongDialog(){
@@ -52,9 +48,7 @@ class MainActivity : AppCompatActivity() {
             if (newSongName.isNotEmpty()) {
                 //create Status object and add to list
                 val song = Song(0 ,newSongName, newSongArtist, newSongKey)
-                ObjectBoxUtils.songBox.put(song)
-                songList.add(song)
-                songAdapter.notifyItemInserted(songList.size + 1)
+                SongListUtils.addSong(song)
                 ObjectBoxUtils.printDB()
                 newSongDialog.dismiss()
             }
