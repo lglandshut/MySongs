@@ -3,8 +3,8 @@ package com.example.mysongs.Utils
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mysongs.Song
-import com.example.mysongs.SonglistAdapter
+import com.example.mysongs.Songs.Song
+import com.example.mysongs.Adapter.SonglistAdapter
 import com.example.mysongs.databinding.ActivityMainBinding
 
 object SongListUtils {

@@ -1,4 +1,4 @@
-package com.example.mysongs
+package com.example.mysongs.Adapter
 
 import android.app.AlertDialog
 import android.content.Context
@@ -6,6 +6,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mysongs.Activities.SongActivity
+import com.example.mysongs.Enums.Keys
+import com.example.mysongs.Enums.SongTypes
+import com.example.mysongs.Songs.Song
 import com.example.mysongs.Utils.ObjectBoxUtils
 import com.example.mysongs.Utils.SongListUtils
 import com.example.mysongs.databinding.SongRowItemBinding
@@ -40,7 +44,7 @@ class SonglistAdapter(list: List<Song>) :
             itemBinding.songName.text = song.title.toString()
             if(song.artist != null)
             itemBinding.songArtist.text = song.artist.toString()
-            itemBinding.key.text = song.key?.key
+            if(song.key != Keys.NONE) itemBinding.key.text = song.key?.key
 
             itemBinding.root.setOnClickListener { openSong(song) }
             itemBinding.root.setOnLongClickListener { deleteSongDialog(song)}

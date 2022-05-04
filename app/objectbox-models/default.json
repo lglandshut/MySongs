@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:965235415077700677",
-      "lastPropertyId": "4:4814995088513394997",
+      "lastPropertyId": "7:1748526484785714669",
       "name": "Song",
       "properties": [
         {
@@ -24,26 +24,48 @@
         {
           "id": "3:3145630003676037575",
           "name": "artist",
-          "type": 9
+          "indexId": "2:3750446508411460298",
+          "type": 9,
+          "flags": 2048
         },
         {
           "id": "4:4814995088513394997",
           "name": "key",
-          "type": 9
+          "indexId": "3:3042973745251712607",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "5:7001589172707886277",
+          "name": "type",
+          "indexId": "4:268750469855506070",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "7:1748526484785714669",
+          "name": "uri",
+          "indexId": "6:7162432483662087220",
+          "type": 9,
+          "flags": 2048
         }
       ],
       "relations": []
     }
   ],
   "lastEntityId": "1:965235415077700677",
-  "lastIndexId": "1:5130060858618719410",
+  "lastIndexId": "6:7162432483662087220",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
   "retiredEntityUids": [],
-  "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredIndexUids": [
+    7758264759077788848
+  ],
+  "retiredPropertyUids": [
+    4528175028487173778
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

@@ -11,23 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#7C673AB7"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="71dp"
             android:foregroundTint="#673AB7">
 
             <TextView
                 android:id="@+id/song_name"
-                android:layout_width="130dp"
-                android:layout_height="25dp"
+                android:layout_width="160dp"
+                android:layout_height="55dp"
                 android:layout_marginStart="16dp"
                 android:text="Song"
+                android:maxLines="2"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                android:gravity="center_vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -36,22 +39,24 @@
             <TextView
                 android:id="@+id/song_artist"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="55dp"
                 android:layout_marginStart="16dp"
                 android:text="Artist"
                 android:textSize="16sp"
+                android:maxLines="2"
+                android:gravity="center_vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/song_name"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.478" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/key"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
                 android:layout_marginEnd="16dp"
-                android:text="Key"
-                android:textSize="16sp"
+                android:text=""
+                android:textSize="25dp"
+                android:gravity="center_vertical|right"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
