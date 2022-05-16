@@ -51,20 +51,46 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:1001054157735468891",
+      "lastPropertyId": "3:4802473122359500961",
+      "name": "ComparatorContainer",
+      "properties": [
+        {
+          "id": "1:2872271664848120018",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1294365449987460438",
+          "name": "comparator",
+          "indexId": "7:5853752127765076181",
+          "type": 9,
+          "flags": 2048
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:965235415077700677",
-  "lastIndexId": "6:7162432483662087220",
+  "lastEntityId": "3:4881382299019571667",
+  "lastIndexId": "7:5853752127765076181",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    4881382299019571667
+  ],
   "retiredIndexUids": [
     7758264759077788848
   ],
   "retiredPropertyUids": [
-    4528175028487173778
+    4528175028487173778,
+    1905639709242591635,
+    7265332175614044730,
+    4802473122359500961
   ],
   "retiredRelationUids": [],
   "version": 1

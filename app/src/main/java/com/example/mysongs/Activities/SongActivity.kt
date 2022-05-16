@@ -27,6 +27,7 @@ class SongActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocusChange
     private lateinit var editLinkButton: ImageButton
     private lateinit var openLinkButton: Button
     private lateinit var binding: ActivitySongBinding
+    private var changesSaved: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -77,7 +78,7 @@ class SongActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocusChange
      * Überprüfen ob ungespeicherte Änderungen vorliegen, wenn BackButton gedrückt wird
      */
     override fun onBackPressed() {
-        if(textChanged()){
+        if(!changesSaved){
             showSaveChangesDialog()
         }
         else finish()
@@ -87,9 +88,14 @@ class SongActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocusChange
      * Vergleicht die Eingabe mit dem Song-Objekt
      */
     fun textChanged(): Boolean {
-        return editTextSongName.text.toString() != clickedSong.title ||
-                editTextArtistName.text.toString() != clickedSong.artist ||
-                spinnerKey.selectedItemPosition != clickedSong.key?.ordinal
+        var artistName : String? = editTextArtistName.text.toString()
+        if(artistName.isNullOrEmpty()) artistName = null
+        var textChanged: Boolean =
+            editTextSongName.text.toString() != clickedSong.title ||
+             artistName != clickedSong.artist ||
+             spinnerKey.selectedItemPosition != clickedSong.key?.ordinal
+        if(textChanged) changesSaved = false
+        return textChanged
     }
 
     /**
@@ -160,13 +166,17 @@ class SongActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocusChange
      * Änderungen in DB speichern
      */
     private fun saveChanges(){
-        ObjectBoxUtils.updateDB(
+        saveChangesButton.visibility = View.INVISIBLE
+        var keyValue = spinnerKey.selectedItem.toString()
+        val key: Keys = if(keyValue.isEmpty()) Keys.NONE else Keys.valueOf(keyValue.replace("#", "s"))
+        ObjectBoxUtils.updateSongDB(
             clickedSong,
             editTextSongName.text.toString(),
             editTextArtistName.text.toString(),
-            Keys.valueOf(spinnerKey.selectedItem.toString().replace("#","s")),
+            key,
             clickedSong.uri
         )
+        changesSaved = true
     }
 
     /**

@@ -6,39 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity">
 
+    <!--<include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar" />-->
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
+        android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/design_default_color_primary"
-        app:titleTextColor="@color/design_default_color_on_primary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/design_default_color_on_primary">
+
+        <ImageButton
+            android:id="@+id/button_more"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:background="@color/design_default_color_primary"
+            android:contentDescription="Show Dialog"
+            app:srcCompat="@drawable/dots" />
+
+        <ImageButton
+            android:id="@+id/button_sort"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:background="@color/design_default_color_primary"
+            android:contentDescription="Sorts the songs"
+            app:srcCompat="@drawable/sort" />
+
+        <ImageButton
+            android:id="@+id/button_search"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="end"
+            android:background="@drawable/search"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="400dp"
-        android:layout_height="680dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar"
         tools:itemCount="3"
         tools:listitem="@layout/song_row_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/buttonAddNewSong"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/design_default_color_primary"
         android:clickable="true"
+        android:contentDescription="Add a new Song"
+        android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        tools:srcCompat="@android:drawable/ic_menu_add" />
+        app:maxImageSize="20dp"
+        app:srcCompat="@drawable/add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

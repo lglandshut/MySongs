@@ -23,7 +23,9 @@ object SongListUtils {
     fun refreshList() {
         songList.clear()
         songList.addAll(ObjectBoxUtils.songBox.all)
+        ObjectBoxUtils.printSongDB()
         songAdapter.notifyDataSetChanged()
+        sortSongs(ObjectBoxUtils.comparatorDB())
     }
 
     fun addSong(song : Song) {
@@ -40,6 +42,11 @@ object SongListUtils {
 
         songAdapter.notifyItemRemoved(position)
         songAdapter.notifyItemRangeChanged(position, songList.size);
+    }
+
+    fun sortSongs(comp: Comparator<Song>) {
+        songList.sortWith(comp)
+        songAdapter.notifyDataSetChanged()
     }
 
     fun printSongs(){

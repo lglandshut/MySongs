@@ -1,7 +1,7 @@
 package com.example.mysongs.Enums
 
-enum class Keys(var key : String = "NONE") {
-    NONE("NONE"),
+enum class Keys(var key : String? = "") {
+    NONE(""),
     C("C"),
     Cs("C#"),
     D("D"),

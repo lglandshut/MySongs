@@ -24,6 +24,7 @@ open class Song(
 
     @Index var uri: String? = null
 
+
 ) : Serializable {
     open fun showGUI(binding: ActivitySongBinding){}
 }

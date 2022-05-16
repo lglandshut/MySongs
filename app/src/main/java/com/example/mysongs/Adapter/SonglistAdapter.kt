@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysongs.Activities.SongActivity
 import com.example.mysongs.Enums.Keys
-import com.example.mysongs.Enums.SongTypes
 import com.example.mysongs.Songs.Song
 import com.example.mysongs.Utils.ObjectBoxUtils
 import com.example.mysongs.Utils.SongListUtils
@@ -64,7 +63,7 @@ class SonglistAdapter(list: List<Song>) :
                 setTitle("Delete ${clickedSong.title}?")
                 setPositiveButton("Ok") { _, _ ->
                     SongListUtils.removeSong(clickedSong)
-                    ObjectBoxUtils.printDB()
+                    ObjectBoxUtils.printSongDB()
                 }
                 setNegativeButton("Abbrechen") { _, _ -> }
             }
