@@ -2,14 +2,20 @@ package com.example.mysongs.Activities
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Color.WHITE
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.PopupMenu
+import android.widget.TextView
 import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import com.example.mysongs.Enums.Keys
 import com.example.mysongs.Enums.SongTypes
 import com.example.mysongs.R
@@ -53,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             var newSongArtist: String? = dialogBinding.artistName.text.toString().trim()
             if(newSongArtist.isNullOrEmpty()) newSongArtist = null
 
-            var keyValue = dialogBinding.spinnerKey.selectedItem.toString()
+            val keyValue = dialogBinding.spinnerKey.selectedItem.toString()
             val newSongKey: Keys = if(keyValue.isEmpty()) Keys.NONE else Keys.valueOf(keyValue.replace("#", "s"))
             val newSongType: SongTypes = SongTypes.valueOf(dialogBinding.spinnerType.selectedItem.toString())
 
@@ -76,11 +82,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         val toolbar = binding.toolBar
-        //toolbar.setLogo(R.drawable.app_icon)
-        setSupportActionBar(toolbar)
-        val buttonAddNewSong = binding.buttonAddNewSong;
-        buttonAddNewSong.setOnClickListener { openAddSongDialog() }
+        val toolbarSearch = binding.toolBarSearch
+        val buttonAddNewSong = binding.buttonAddNewSong
         val sortButton = binding.buttonSort
+        val buttonMore = binding.buttonMore
+        val buttonSearch = binding.buttonSearch
+        val searchView = binding.searchView
+
+        setSupportActionBar(toolbar)
+        buttonAddNewSong.setOnClickListener { openAddSongDialog() }
         sortButton.setOnClickListener {
             val modalBottomSheet = ModalBottomSheet()
             modalBottomSheet.show(
@@ -88,10 +98,25 @@ class MainActivity : AppCompatActivity() {
                 ModalBottomSheet.TAG
             )
         }
-        val buttonMore = binding.buttonMore
         buttonMore.setOnClickListener { v: View ->
-            showMenu(v, R.menu.overflow_menu) }
+            showMenu(v, R.menu.overflow_menu)
         }
+        buttonSearch.setOnClickListener{
+            toolbar.visibility = View.INVISIBLE
+            toolbarSearch.visibility = View.VISIBLE
+            searchView.isIconified = false
+        }
+
+        //val searchEditText =  searchView.findViewById(androidx.appcompat.R.id.search_src_text)
+        //toolbarSearch.visibility = View.VISIBLE
+        //(searchView.findViewById(androidx.appcompat.R.id.search_src_text) as EditText).setTextColor(WHITE)
+        //searchEditText.setTextColor(WHITE)
+        searchView.setOnCloseListener {
+            toolbar.visibility = View.VISIBLE
+            toolbarSearch.visibility = View.INVISIBLE
+            true
+        }
+    }
 
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
         val popup = PopupMenu(v.context, v)

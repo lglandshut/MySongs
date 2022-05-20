@@ -45,11 +45,34 @@
 
         <ImageButton
             android:id="@+id/button_search"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="20dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="25dp"
             android:layout_gravity="end"
             android:background="@drawable/search"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar_search"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/design_default_color_primary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@color/design_default_color_on_primary"
+        android:visibility="invisible">
+
+        <SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:closeIcon="@drawable/close"
+            android:searchHintIcon="@drawable/search"
+            />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -60,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tool_bar"
-        tools:itemCount="3"
+        tools:itemCount="7"
         tools:listitem="@layout/song_row_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -3,6 +3,7 @@ buildscript {
     ext.objectboxVersion = "3.1.2"
     repositories {
         mavenCentral()
+        google()
         // Note: 2.9.0 and older are available on jcenter()
     }
     dependencies {
