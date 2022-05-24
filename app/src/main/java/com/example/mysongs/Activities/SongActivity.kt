@@ -58,7 +58,14 @@ class SongActivity : AppCompatActivity(), View.OnKeyListener, View.OnFocusChange
      *  Bei einem onKey event den saveChangesButton anzeigen
      */
     override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_ENTER && event?.action == KeyEvent.ACTION_UP) {
+
+        if (event?.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+            if(!changesSaved){
+                showSaveChangesDialog()
+            }
+            else finish()
+        }
+        else if (event?.action == KeyEvent.ACTION_UP) {
             //Wenn sich Text geändert hat Speicher-Button anzeigen
             if(textChanged()) saveChangesButton.visibility = View.VISIBLE
             else saveChangesButton.visibility = View.INVISIBLE

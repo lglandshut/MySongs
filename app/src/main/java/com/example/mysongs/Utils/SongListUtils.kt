@@ -17,7 +17,7 @@ object SongListUtils {
 
     val songList: MutableList<Song> = ArrayList()
 
-    lateinit var songAdapter: SonglistAdapter
+    private lateinit var songAdapter: SonglistAdapter
     val searchList: MutableList<Song> = ArrayList()
 
     fun init(context: Context, binding: ActivityMainBinding){

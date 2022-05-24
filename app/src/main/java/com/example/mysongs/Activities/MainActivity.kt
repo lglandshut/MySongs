@@ -31,18 +31,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         ObjectBoxUtils.init(this)
         SongListUtils.init(this, binding)
-        SongListUtils.generateList(4)
         val view = binding.root
         setContentView(view)
         initUI()
+
+        //SongListUtils.generateList(4)
     }
 
     override fun onResume() {
         super.onResume()
-        //if(SongListUtils.searchList.isNotEmpty())
         SongListUtils.refreshList()
+        if (SongListUtils.searchList.isNotEmpty()) {
+            SongListUtils.searchList.clear()
+            SongListUtils.searchList.addAll(SongListUtils.songList)
+            SongListUtils.filter(binding.searchView.query.toString())
+        }
     }
 
+    /**
+     * Öffnet den Song hinzufügen Dialog
+     */
     private fun openAddSongDialog(){
 
         val dialogBinding : AddSongDialogBinding = AddSongDialogBinding.inflate(layoutInflater)
@@ -125,6 +133,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Zeigt dass Kontextmenü an
+     */
     private fun showMenu(v: View, @MenuRes menuRes: Int) {
         val popup = PopupMenu(v.context, v)
         popup.menuInflater.inflate(menuRes, popup.menu)
