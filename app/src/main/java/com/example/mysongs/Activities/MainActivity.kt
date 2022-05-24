@@ -2,17 +2,12 @@ package com.example.mysongs.Activities
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.Color.WHITE
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.PopupMenu
-import android.widget.TextView
 import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -25,7 +20,6 @@ import com.example.mysongs.Utils.SongListUtils
 import com.example.mysongs.databinding.ActivityMainBinding
 import com.example.mysongs.databinding.AddSongDialogBinding
 import org.geeksforgeeks.gfgmodalsheet.ModalBottomSheet
-import java.security.Key
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         ObjectBoxUtils.init(this)
         SongListUtils.init(this, binding)
+        SongListUtils.generateList(4)
         val view = binding.root
         setContentView(view)
         initUI()
@@ -44,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        ObjectBoxUtils.printCompDB()
+        //if(SongListUtils.searchList.isNotEmpty())
         SongListUtils.refreshList()
     }
 
@@ -99,21 +94,33 @@ class MainActivity : AppCompatActivity() {
             )
         }
         buttonMore.setOnClickListener { v: View ->
-            showMenu(v, R.menu.overflow_menu)
-        }
+            showMenu(v, R.menu.overflow_menu) }
+
+        searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener,
+            SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if(!query.isNullOrEmpty()) SongListUtils.filter(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                SongListUtils.filter(newText)
+                return true
+            }
+        })
+
         buttonSearch.setOnClickListener{
             toolbar.visibility = View.INVISIBLE
             toolbarSearch.visibility = View.VISIBLE
             searchView.isIconified = false
+            SongListUtils.searchList.addAll(SongListUtils.songList)
         }
 
-        //val searchEditText =  searchView.findViewById(androidx.appcompat.R.id.search_src_text)
-        //toolbarSearch.visibility = View.VISIBLE
-        //(searchView.findViewById(androidx.appcompat.R.id.search_src_text) as EditText).setTextColor(WHITE)
-        //searchEditText.setTextColor(WHITE)
         searchView.setOnCloseListener {
             toolbar.visibility = View.VISIBLE
             toolbarSearch.visibility = View.INVISIBLE
+            SongListUtils.searchList.clear()
+            SongListUtils.refreshList()
             true
         }
     }

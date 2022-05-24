@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysongs.Activities.SongActivity
 import com.example.mysongs.Enums.Keys
@@ -12,14 +13,16 @@ import com.example.mysongs.Songs.Song
 import com.example.mysongs.Utils.ObjectBoxUtils
 import com.example.mysongs.Utils.SongListUtils
 import com.example.mysongs.databinding.SongRowItemBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 /*
     Adapter for the list of Boards in Main Activity
  */
-class SonglistAdapter(list: List<Song>) :
+class SonglistAdapter(list: MutableList<Song>) :
     RecyclerView.Adapter<SonglistAdapter.BoardViewHolder>() {
 
-    private val songList: List<Song> = list
+    private val songList: MutableList<Song> = list
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -71,5 +74,4 @@ class SonglistAdapter(list: List<Song>) :
             return true
         }
     }
-
 }

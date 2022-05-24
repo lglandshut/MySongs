@@ -13,7 +13,7 @@ import java.io.Serializable
 @Entity
 open class Song(
     @Id var id: Long,
-    @Index var title: String? = null,
+    @Index var title: String,
     @Index var artist: String? = null,
 
     @Convert(converter = KeyConverter::class, dbType = String::class)

@@ -30,7 +30,7 @@
             android:layout_gravity="end"
             android:layout_marginEnd="10dp"
             android:background="@color/design_default_color_primary"
-            android:contentDescription="Show Dialog"
+            android:contentDescription="Shows Dialog"
             app:srcCompat="@drawable/dots" />
 
         <ImageButton
@@ -41,15 +41,18 @@
             android:layout_marginEnd="10dp"
             android:background="@color/design_default_color_primary"
             android:contentDescription="Sorts the songs"
-            app:srcCompat="@drawable/sort" />
+            app:srcCompat="@drawable/sort"/>
 
         <ImageButton
             android:id="@+id/button_search"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:layout_marginEnd="25dp"
             android:layout_gravity="end"
-            android:background="@drawable/search"/>
+            android:background="@color/design_default_color_primary"
+            app:iconifiedByDefault="false"
+            app:srcCompat="@drawable/search"
+            android:contentDescription="Shows the Search-Bar" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.Toolbar

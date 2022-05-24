@@ -5,12 +5,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mysongs.Songs.Song
 import com.example.mysongs.Adapter.SonglistAdapter
+import com.example.mysongs.Enums.Keys
+import com.example.mysongs.Enums.SongTypes
 import com.example.mysongs.databinding.ActivityMainBinding
+import java.lang.reflect.Type
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 object SongListUtils {
 
     val songList: MutableList<Song> = ArrayList()
-    private lateinit var songAdapter: SonglistAdapter
+
+    lateinit var songAdapter: SonglistAdapter
+    val searchList: MutableList<Song> = ArrayList()
 
     fun init(context: Context, binding: ActivityMainBinding){
         songAdapter = SonglistAdapter(songList)
@@ -49,9 +57,33 @@ object SongListUtils {
         songAdapter.notifyDataSetChanged()
     }
 
+    fun filter(text: String?) {
+
+        if(text.isNullOrEmpty()) refreshList()
+        else {
+            val newText = text.lowercase(Locale.getDefault())
+            songList.clear()
+            songList.addAll(searchList.filter { x ->
+                x.title.lowercase().contains(newText) ||
+                x.artist?.lowercase()?.contains(newText) == true
+            }.toMutableList())
+            songList.size
+        }
+        songAdapter.notifyDataSetChanged()
+    }
+
     fun printSongs(){
         songList.forEach {
             println(it)
+        }
+    }
+
+    fun generateList(quantity: Int){
+        var i = quantity
+        while(i > 0){
+            val song = Song(0 ,"Song$i", "Artist$i", Keys.A, if(i%2 == 0)SongTypes.GUITAR else SongTypes.PIANO)
+            addSong(song)
+            i--
         }
     }
 }

@@ -34,7 +34,6 @@ object ObjectBoxUtils {
         val oldComp = sortBox[1]
         oldComp.comparator = comp
         sortBox.put(oldComp)
-        printCompDB()
     }
 
     fun comparatorDB() : Comparator<Song> {
@@ -61,13 +60,5 @@ object ObjectBoxUtils {
             println("Song: ${it.title}, Artist: ${it.artist}, ID: ${it.id}")
         }
         println(songBox.count())
-    }
-
-    fun printCompDB(){
-        val test = sortBox.all
-        test.forEach{
-            println("ID: ${it.id}, Comparator: ${it.comparator}")
-        }
-        println(sortBox.count())
     }
 }
