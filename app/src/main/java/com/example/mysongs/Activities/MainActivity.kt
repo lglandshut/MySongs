@@ -1,6 +1,7 @@
 package com.example.mysongs.Activities
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -41,10 +42,23 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         SongListUtils.refreshList()
+        //Wenn während Suche onResume, Suchergebnisse anzeigen
         if (SongListUtils.searchList.isNotEmpty()) {
             SongListUtils.searchList.clear()
             SongListUtils.searchList.addAll(SongListUtils.songList)
             SongListUtils.filter(binding.searchView.query.toString())
+        }
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        with(builder)
+        {
+            setTitle("Exit MySongs?")
+            setPositiveButton("Yes") {_, _ -> finish()}
+
+            setNegativeButton("No") {_, _->}
+            show()
         }
     }
 
@@ -145,6 +159,10 @@ class MainActivity : AppCompatActivity() {
                 val uri: Uri = Uri.parse("https://fretbo.ar")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
+            }
+            if (menuItem.title == "Settings") {
+                val intent = Intent(v.context, SettingsActivity::class.java)
+                v.context.startActivity(intent)
             }
             true
         }
