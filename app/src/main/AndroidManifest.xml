@@ -19,10 +19,10 @@
         </activity>
         <activity
             android:name=".Activities.SongActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".Activities.SettingsActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
 
 </manifest>

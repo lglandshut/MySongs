@@ -13,11 +13,15 @@ object ObjectBoxUtils {
 
     lateinit var songBox: Box<Song>
     lateinit var sortBox: Box<ComparatorContainer>
+    var isInitialized = false
 
     fun init(context: Context){
-        ObjectBox.init(context)
-        songBox = ObjectBox.store.boxFor(Song::class.java)
-        sortBox = ObjectBox.store.boxFor(ComparatorContainer::class.java)
+        if(!isInitialized) {
+            ObjectBox.init(context)
+            songBox = ObjectBox.store.boxFor(Song::class.java)
+            sortBox = ObjectBox.store.boxFor(ComparatorContainer::class.java)
+            isInitialized = true
+        }
     }
 
     fun updateSongDB(song: Song, title: String? = null, artist: String? = null, keys: Keys? = null, link: String? = null){

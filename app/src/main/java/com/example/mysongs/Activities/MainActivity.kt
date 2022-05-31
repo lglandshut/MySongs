@@ -5,17 +5,20 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.PopupMenu
 import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.appcompat.widget.SearchView
 import com.example.mysongs.Enums.Keys
 import com.example.mysongs.Enums.SongTypes
 import com.example.mysongs.R
 import com.example.mysongs.Songs.Song
+import com.example.mysongs.UserSettings
 import com.example.mysongs.Utils.ObjectBoxUtils
 import com.example.mysongs.Utils.SongListUtils
 import com.example.mysongs.databinding.ActivityMainBinding
@@ -35,8 +38,14 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         initUI()
-
+        initSettings()
         //SongListUtils.generateList(4)
+    }
+
+    private fun initSettings() {
+        val sharedPref = getSharedPreferences("settings",Context.MODE_PRIVATE)
+        val theme = sharedPref.getInt("colorTheme",1)
+        UserSettings.setColorTheme(this,theme)
     }
 
     override fun onResume() {
